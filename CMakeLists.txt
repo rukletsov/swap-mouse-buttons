@@ -17,19 +17,19 @@ ELSE ()
 ENDIF (MSVC)
 
 SET (MouseButtonSwap_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/swap_mouse_buttons_win.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/swap_mouse_buttons_unix.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_win.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_unix.cpp
 )
 
 # Different code is used for different platforms.
 IF (MSVC)
     # Make files for other platforms visible, but not compilable.
-    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/swap_mouse_buttons_unix.cpp
+    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_unix.cpp
             PROPERTIES HEADER_FILE_ONLY TRUE)
 
     # Note that WIN32 key is used to supress the console window.
     ADD_EXECUTABLE (swap_mouse_buttons WIN32
-					${MouseButtonSwap_SRCS}
+                    ${MouseButtonSwap_SRCS}
     )
 
     # Supress secure warnings (C4996) for MSVC compiler.
@@ -39,11 +39,11 @@ IF (MSVC)
 ELSEIF (UNIX)
 
     # Make files for other platforms visible, but not compilable.
-    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/swap_mouse_buttons_win.cpp
+    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_win.cpp
         PROPERTIES HEADER_FILE_ONLY TRUE)
 
     ADD_EXECUTABLE (swap_mouse_buttons
-					${MouseButtonSwap_SRCS}
+                    ${MouseButtonSwap_SRCS}
     )
 
     TARGET_LINK_LIBRARIES (swap_mouse_buttons
