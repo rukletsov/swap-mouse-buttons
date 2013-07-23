@@ -40,6 +40,10 @@ ELSEIF (UNIX)
     FIND_PACKAGE (Boost 1.38 REQUIRED)
     INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
 
+    # Boost.ScopeExit is used on linux to ensure resource release.
+    FIND_PACKAGE (X11 REQUIRED)
+    INCLUDE_DIRECTORIES (${X11_X11_INCLUDE_PATH})
+
     # Make files for other platforms visible, but not compilable.
     SET_SOURCE_FILES_PROPERTIES (${SwapMouseButtons_WIN_SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
@@ -49,7 +53,7 @@ ELSEIF (UNIX)
     )
 
     TARGET_LINK_LIBRARIES (swap_mouse_buttons
-                           X11
+                           ${X11_X11_LIB}
     )
 
 ELSE ()
