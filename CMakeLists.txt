@@ -24,9 +24,11 @@ SET (SwapMouseButtons_UNIX_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_unix.cpp
 )
 
-# Different approaches are used for different platforms.
+# Different approaches (and sources) are used for different platforms, a kludge is used
+# to persuade CMake to include all sources in the project and therefore make them visible
+# in an IDE but not compilable.
 IF (MSVC)
-    # Make files for other platforms visible, but not compilable.
+    # See above for the explanation for this kludge.
     SET_SOURCE_FILES_PROPERTIES (${SwapMouseButtons_UNIX_SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
     # Note that WIN32 key is used to supress the console window.
@@ -44,7 +46,7 @@ ELSEIF (UNIX)
     FIND_PACKAGE (X11 REQUIRED)
     INCLUDE_DIRECTORIES (${X11_X11_INCLUDE_PATH})
 
-    # Make files for other platforms visible, but not compilable.
+    # See above for the explanation for this kludge.
     SET_SOURCE_FILES_PROPERTIES (${SwapMouseButtons_WIN_SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
     ADD_EXECUTABLE (swap_mouse_buttons
