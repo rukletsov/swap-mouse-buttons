@@ -69,7 +69,7 @@ int main()
             return 0;
 
         case MappingBusy:
-            sleep(2);
+            sleep(1);
             continue;
 
         default:
