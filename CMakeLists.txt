@@ -38,6 +38,10 @@ IF (MSVC)
 
 ELSEIF (UNIX)
 
+    # Boost.ScopeExit is used on linux to ensure resource release.
+    FIND_PACKAGE (Boost 1.38 REQUIRED)
+    INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
+
     # Make files for other platforms visible, but not compilable.
     SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_win.cpp
         PROPERTIES HEADER_FILE_ONLY TRUE)
