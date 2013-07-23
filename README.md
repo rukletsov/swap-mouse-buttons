@@ -1,11 +1,11 @@
 
 # Summary
 --------------------------------------------------------------------------------
-SwapMouseButtons is a small cross-platform utility that swaps left and right mouse buttons. It can be useful for ambidextrous users and people who learn handling mouse with either hand.
+SwapMouseButtons is a small cross-platform utility that swaps left and right mouse buttons. It can be useful for ambidextrous users and people who learn handling how to handle the mouse with either hand.
 
 # Dependencies
 --------------------------------------------------------------------------------
-On Windows the application uses WinAPI, that means only "windows.h" and standard system libraries are required to build and run the application.
+On Windows the application uses WinAPI, that means only `windows.h` and standard system libraries are required to build and run the application.
 
 On Linux there are slightly more dependencies. This is because the mouse button mapping is managed not by the kernel, but in the X Window System. The application should actually work on an arbitrary Unix, where the following is available:
 
@@ -16,11 +16,11 @@ On Linux there are slightly more dependencies. This is because the mouse button 
 --------------------------------------------------------------------------------
 No pre-built binaries are currently available. Use the following command to get the source code:
 
-    $ hg clone https://bitbucket.org/rukletsov/b
+    $ hg clone https://bitbucket.org/rukletsov/swapmousebuttons
 
-CMake is currently used to build the application. On Windows the code is built as a GUI executable, that hides the console window.
+CMake is currently used to build the application. On Windows the code is built as a GUI executable to hide the console window.
 
-The code has been successfully built with, tested and run on:
+The code has been successfully built with and run on:
 
  * openSUSE 12.2 64bit with gcc 4.6.2.
  * openSUSE 12.2 64bit with clang 3.1.
