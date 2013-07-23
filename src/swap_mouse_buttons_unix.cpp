@@ -22,9 +22,9 @@ int main()
     Display* display(NULL);
     BOOST_SCOPE_EXIT( (&display) )
     {
-        if(NULL != display)
+        if (NULL != display)
         {
-            XCloseDisplay (display);
+            XCloseDisplay(display);
             display = NULL;
         }
     } BOOST_SCOPE_EXIT_END
