@@ -18,24 +18,19 @@ const int kMouseButtonsBusy = 5;
 
 int main()
 {
-    // Define a delayed release of the display pointer.
-    Display* display(NULL);
-    BOOST_SCOPE_EXIT( (&display) )
-    {
-        if (NULL != display)
-        {
-            XCloseDisplay(display);
-            display = NULL;
-        }
-    } BOOST_SCOPE_EXIT_END
-
     // Get default display.
-    display = XOpenDisplay(NULL);
-    if (!display)
+    Display* display = XOpenDisplay(NULL);
+    if (NULL == display)
     {
         std::cerr << "Cannot open default display." << std::endl;
         return kXOpenDisplayFailed;
     }
+
+    // Define a delayed release of the display pointer.
+    BOOST_SCOPE_EXIT( (&display) )
+    {
+        XCloseDisplay(display);
+    } BOOST_SCOPE_EXIT_END
 
     // Get current pointer mapping.
     unsigned char pointer_map[kMaxButtonCodes];
