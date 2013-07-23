@@ -19,10 +19,10 @@ const int kMouseButtonsBusy = 5;
 int main()
 {
     // Define a delayed release of the display pointer.
-    Display* display;
+    Display* display(NULL);
     BOOST_SCOPE_EXIT( (&display) )
     {
-        if(display)
+        if(NULL != display)
         {
             XCloseDisplay (display);
             display = NULL;
