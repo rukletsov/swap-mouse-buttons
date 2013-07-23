@@ -1,7 +1,7 @@
 
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8.4)
 
-PROJECT (MouseButtonSwap)
+PROJECT (SwapMouseButtons)
 
 SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
@@ -16,38 +16,36 @@ ELSE ()
     MESSAGE ("Unsupported compiler used: ${CMAKE_CXX_COMPILER_ID}")
 ENDIF (MSVC)
 
-SET (MouseButtonSwap_SRCS
+SET (SwapMouseButtons_WIN_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_win.cpp
+)
+
+SET (SwapMouseButtons_UNIX_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_unix.cpp
 )
 
-# Different code is used for different platforms.
+# Different approaches are used for different platforms.
 IF (MSVC)
     # Make files for other platforms visible, but not compilable.
-    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_unix.cpp
-            PROPERTIES HEADER_FILE_ONLY TRUE)
+    SET_SOURCE_FILES_PROPERTIES (${SwapMouseButtons_UNIX_SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
     # Note that WIN32 key is used to supress the console window.
     ADD_EXECUTABLE (swap_mouse_buttons WIN32
-                    ${MouseButtonSwap_SRCS}
+                    ${SwapMouseButtons_WIN_SRCS}
+                    ${SwapMouseButtons_UNIX_SRCS}
     )
 
-    # Supress secure warnings (C4996) for MSVC compiler.
-    SET_TARGET_PROPERTIES (swap_mouse_buttons PROPERTIES COMPILE_FLAGS
-                           "/D _CRT_SECURE_NO_DEPRECATE /D _SCL_SECURE_NO_WARNINGS")
-
 ELSEIF (UNIX)
-
     # Boost.ScopeExit is used on linux to ensure resource release.
     FIND_PACKAGE (Boost 1.38 REQUIRED)
     INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
 
     # Make files for other platforms visible, but not compilable.
-    SET_SOURCE_FILES_PROPERTIES (${CMAKE_CURRENT_SOURCE_DIR}/src/swap_mouse_buttons_win.cpp
-        PROPERTIES HEADER_FILE_ONLY TRUE)
+    SET_SOURCE_FILES_PROPERTIES (${SwapMouseButtons_WIN_SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
     ADD_EXECUTABLE (swap_mouse_buttons
-                    ${MouseButtonSwap_SRCS}
+                    ${SwapMouseButtons_WIN_SRCS}
+                    ${SwapMouseButtons_UNIX_SRCS}
     )
 
     TARGET_LINK_LIBRARIES (swap_mouse_buttons
