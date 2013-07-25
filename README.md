@@ -1,4 +1,3 @@
-
 # Summary
 --------------------------------------------------------------------------------
 SwapMouseButtons is a small cross-platform utility that swaps left and right mouse buttons. It can be useful for ambidextrous users and people who learn how to handle the mouse with either hand.
@@ -24,5 +23,5 @@ The code has been successfully built with and run on:
 
  * openSUSE 12.2 64bit with gcc 4.6.2.
  * openSUSE 12.2 64bit with clang 3.1.
- * Windows 7 64bit with msvc2010.
  * Ubuntu 12.04 64bit with gcc 4.6.3.
+ * Windows 7 64bit with msvc2010.
